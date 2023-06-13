@@ -41,6 +41,9 @@ import org.neo4j.cypherdsl.core.utils.Assertions;
 @API(status = STABLE, since = "1.0")
 public final class RelationshipChain implements RelationshipPattern, ExposesPatternLengthAccessors<RelationshipChain> {
 
+
+	private static final RelationshipChain EMPTY_RELATIONSHIP_CHAIN = new RelationshipChain(new LinkedList<>());
+
 	private final LinkedList<Relationship> relationships;
 
 	static RelationshipChain create(Relationship firstElement) {
@@ -60,6 +63,11 @@ public final class RelationshipChain implements RelationshipPattern, ExposesPatt
 
 	private RelationshipChain(List<Relationship> elements) {
 		this.relationships = new LinkedList<>(elements);
+	}
+
+	static RelationshipChain empty() {
+
+		return EMPTY_RELATIONSHIP_CHAIN;
 	}
 
 	RelationshipChain add(Relationship element) {
